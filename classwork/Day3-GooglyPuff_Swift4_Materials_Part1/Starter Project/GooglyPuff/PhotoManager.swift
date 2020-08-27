@@ -49,16 +49,37 @@ final class PhotoManager {
   private init() {}
   static let shared = PhotoManager()
   
+  private let concurrentPhotoQueue = DispatchQueue(label: "com.raywenderlich.GooglyPuff.photoQueue",
+                                                   attributes: .concurrent)
   private var unsafePhotos: [Photo] = []
   
   var photos: [Photo] {
-    return unsafePhotos
+//    return unsafePhotos
+    var photosCopy: [Photo]!
+    // 1
+    concurrentPhotoQueue.sync { //Dispatch synchronously onto the concurrentPhotoQueue to perform the read
+      // 2
+      photosCopy = self.unsafePhotos
+    }
+    return photosCopy
   }
   
   func addPhoto(_ photo: Photo) {
-    unsafePhotos.append(photo)
-    DispatchQueue.main.async { [weak self] in
-      self?.postContentAddedNotification()
+//    unsafePhotos.append(photo)
+//    DispatchQueue.main.async { [weak self] in
+//      self?.postContentAddedNotification()
+//    }
+    concurrentPhotoQueue.async(flags: .barrier) { [weak self] in //You dispatch the write operation asynchronously with a barrier. When it executes, it will be the only item in your queue.
+      // 1
+      guard let self = self else {
+        return
+      }
+      // 2
+      self.unsafePhotos.append(photo)
+      // 3
+      DispatchQueue.main.async { [weak self] in
+        self?.postContentAddedNotification()
+      }
     }
   }
   
