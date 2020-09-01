@@ -69,7 +69,7 @@ final class PhotoManager {
 //    DispatchQueue.main.async { [weak self] in
 //      self?.postContentAddedNotification()
 //    }
-    concurrentPhotoQueue.async(flags: .barrier) { [weak self] in //You dispatch the write operation asynchronously with a barrier. When it executes, it will be the only item in your queue.
+    concurrentPhotoQueue.async(flags: .barrier) { [weak self] in //You dispatch the write operation asynchronously with a barrier. When it executes, it will be the only item in your queue. //if someone is using the resource, then noone can access
       // 1
       guard let self = self else {
         return
