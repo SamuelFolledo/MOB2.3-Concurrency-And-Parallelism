@@ -12,7 +12,8 @@ class TableViewController: UITableViewController {
 
     private var photosDict: [String: String] = [:]
     lazy var photos = NSDictionary(dictionary: photosDict)
-
+    lazy var filteredPhotos: [String: UIImage?] = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,18 +37,23 @@ class TableViewController: UITableViewController {
         
         var image : UIImage?
         
-        guard let imageURL = URL(string:photos[rowKey] as! String),
-            let imageData = try? Data(contentsOf: imageURL) else {
-                return cell
+        if let filteredImage = filteredPhotos[rowKey] {
+            print("Got image already for \(rowKey)")
+            image = filteredImage
+        } else {
+            print("No image yet for \(rowKey)")
+            guard let imageURL = URL(string:photos[rowKey] as! String),
+                let imageData = try? Data(contentsOf: imageURL) else {
+                    return cell
+            }
+            // Simulate a network wait
+            Thread.sleep(forTimeInterval: 1)
+            print("sleeping 1 sec")
+            // Filter image
+            let unfilteredImage = UIImage(data:imageData)
+            image = self.applySepiaFilter(unfilteredImage!)
+            filteredPhotos[rowKey] = image
         }
-        
-        // Simulate a network wait
-        Thread.sleep(forTimeInterval: 1)
-        print("sleeping 1 sec")
-        
-        let unfilteredImage = UIImage(data:imageData)
-        image = self.applySepiaFilter(unfilteredImage!)
-        
         // Configure the cell...
         cell.textLabel?.text = rowKey
         if image != nil {
