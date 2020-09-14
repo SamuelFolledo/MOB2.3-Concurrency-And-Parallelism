@@ -38,27 +38,30 @@ class TableViewController: UITableViewController {
         var image : UIImage?
         
         if let filteredImage = filteredPhotos[rowKey] {
-            print("Got image already for \(rowKey)")
             image = filteredImage
         } else {
-            print("No image yet for \(rowKey)")
-            guard let imageURL = URL(string:photos[rowKey] as! String),
-                let imageData = try? Data(contentsOf: imageURL) else {
-                    return cell
+            DispatchQueue.global(qos: .userInteractive).async {
+                guard let imageURL = URL(string: self.photos[rowKey] as! String),
+                    let imageData = try? Data(contentsOf: imageURL) else {
+                        return
+                }
+                // Simulate a network wait
+                Thread.sleep(forTimeInterval: 1)
+                print("sleeping 1 sec")
+                // Filter image
+                let unfilteredImage = UIImage(data:imageData)
+                image = self.applySepiaFilter(unfilteredImage!)
+                self.filteredPhotos[rowKey] = image
+                DispatchQueue.main.async {
+                    if image != nil {
+                        cell.imageView?.image = image!
+                        cell.layoutSubviews()
+                    }
+                }
             }
-            // Simulate a network wait
-            Thread.sleep(forTimeInterval: 1)
-            print("sleeping 1 sec")
-            // Filter image
-            let unfilteredImage = UIImage(data:imageData)
-            image = self.applySepiaFilter(unfilteredImage!)
-            filteredPhotos[rowKey] = image
         }
         // Configure the cell...
         cell.textLabel?.text = rowKey
-        if image != nil {
-            cell.imageView?.image = image!
-        }
         return cell
     }
     
