@@ -126,14 +126,20 @@
                                                 <constraint firstAttribute="width" constant="200" id="DLG-WG-dBs"/>
                                             </constraints>
                                         </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ZgE-oi-Say">
+                                            <rect key="frame" x="141.5" y="101.5" width="37" height="37"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="MWU-yM-id8" firstAttribute="centerX" secondItem="zss-oW-rkG" secondAttribute="centerX" id="05e-kl-VdF"/>
+                                        <constraint firstItem="ZgE-oi-Say" firstAttribute="centerY" secondItem="zss-oW-rkG" secondAttribute="centerY" id="9lJ-Sx-Eqg"/>
+                                        <constraint firstItem="ZgE-oi-Say" firstAttribute="centerX" secondItem="zss-oW-rkG" secondAttribute="centerX" id="I4S-xn-x7j"/>
                                         <constraint firstItem="MWU-yM-id8" firstAttribute="top" secondItem="zss-oW-rkG" secondAttribute="top" constant="20" id="lCp-fc-c1v"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="nasaImageView" destination="MWU-yM-id8" id="bqX-Dp-73H"/>
+                                    <outlet property="activityIndicator" destination="ZgE-oi-Say" id="3Mz-GL-4LP"/>
+                                    <outlet property="nasaImageView" destination="MWU-yM-id8" id="N4f-r2-0qP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

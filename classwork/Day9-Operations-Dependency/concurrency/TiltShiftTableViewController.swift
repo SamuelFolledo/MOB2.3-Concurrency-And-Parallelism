@@ -29,7 +29,13 @@
 import UIKit
 
 class TiltShiftTableViewController: UITableViewController {
+  
   private let context = CIContext()
+  let queue = OperationQueue()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 10
@@ -37,22 +43,32 @@ class TiltShiftTableViewController: UITableViewController {
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "normal", for: indexPath) as! PhotoCell
-    let name = "\(indexPath.row).png"
-    let inputImage = UIImage(named:name)!
+    cell.display(image: nil)
+    let image = UIImage(named: "\(indexPath.row).png")!
     
-    guard let filter = TiltShiftFilter(image:inputImage, radius:3), let output = filter.outputImage else{
-      print("Failed to generate image")
-      cell.display(image: nil)
-      return cell
+    let op = TiltShiftOperation(image: image)
+    op.completionBlock = {
+      DispatchQueue.main.async {
+        guard let cell = tableView.cellForRow(at: indexPath) as? PhotoCell
+        else { return }
+        cell.isLoading = false
+        cell.display(image: op.outputImage)
+      }
     }
-    let fromRect = CGRect (origin: .zero, size: inputImage.size)
-    guard let cgImage = context.createCGImage(output, from: fromRect) else{
-      print("Image generation failed")
-      cell.display(image:nil)
-      return cell
-    }
-    cell.display(image: UIImage(cgImage:cgImage))
     
+    //create operation
+//    let op = TiltShiftOperation(image: image)
+//    op.completionBlock = {
+//      //do these after operation is completed
+//      DispatchQueue.main.async {
+//        guard let cell = tableView.cellForRow(at: indexPath) as? PhotoCell else { return }
+//        cell.isLoading = false
+//        cell.display(image: op.outputImage)
+////        return cell
+//      }
+//    }
+//    //add operation
+//    queue.addOperation(op)
     return cell
   }
 }

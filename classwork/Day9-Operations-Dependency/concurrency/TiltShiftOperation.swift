@@ -26,4 +26,42 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+import UIKit
 
+final class TiltShiftOperation: Operation {
+  var inputImage: UIImage
+  var outputImage: UIImage?
+  
+  private static let context = CIContext()
+  
+  //MARK: Initializern
+  init(image: UIImage) {
+    inputImage = image
+    super.init()
+  }
+  
+  override func main() {
+    print("TiltShiftOperation main \(inputImage)")
+    getOutputImage()
+  }
+  
+  override func start() {
+    print("Started TiltShiftOperation \(inputImage)")
+    getOutputImage()
+  }
+  
+  func getOutputImage() {
+    guard let filter = TiltShiftFilter(image:inputImage, radius:3),
+          let output = filter.outputImage else {
+              print("Failed to generate image")
+              return
+    }
+    
+    let fromRect = CGRect (origin: .zero, size: inputImage.size)
+    guard let cgImage = TiltShiftOperation.context.createCGImage(output, from: fromRect) else {
+          print("Image generation failed")
+          return
+    }
+    outputImage = UIImage(cgImage: cgImage)
+  }
+}
