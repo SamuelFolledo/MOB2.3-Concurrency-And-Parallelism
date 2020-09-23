@@ -81,9 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				D2A5F2021F4A9144005CD714 /* Concurrency */,
-				D2A5F20F1F4A9144005CD714 /* Info.plist */,
-				5394F02321864DF4006E754C /* LaunchScreen.storyboard */,
-				D2A5F2071F4A9144005CD714 /* Main.storyboard */,
 				D2A5F2011F4A9144005CD714 /* Products */,
 			);
 			indentWidth = 2;
@@ -101,12 +98,15 @@
 		D2A5F2021F4A9144005CD714 /* Concurrency */ = {
 			isa = PBXGroup;
 			children = (
-				F50C222522204FA1003E3283 /* Photos.plist */,
 				D2A5F2201F4A96D0005CD714 /* AppDelegate.swift */,
-				D2A5F20A1F4A9144005CD714 /* Assets.xcassets */,
 				33415554251AD8A200994077 /* Controllers */,
 				33415556251AD8AD00994077 /* Views */,
 				33415558251AD8B600994077 /* Models */,
+				D2A5F20A1F4A9144005CD714 /* Assets.xcassets */,
+				F50C222522204FA1003E3283 /* Photos.plist */,
+				D2A5F20F1F4A9144005CD714 /* Info.plist */,
+				5394F02321864DF4006E754C /* LaunchScreen.storyboard */,
+				D2A5F2071F4A9144005CD714 /* Main.storyboard */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
