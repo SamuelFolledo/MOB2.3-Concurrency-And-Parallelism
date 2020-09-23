@@ -1,4 +1,4 @@
-/// Copyright (c) 2019 Razeware LLC
+/// Copyright (c) 2020 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -28,47 +28,55 @@
 
 import UIKit
 
-class TiltShiftTableViewController: UITableViewController {
+final class TiltShiftOperation: Operation {
+  var inputImage: UIImage?
+  var outputImage: UIImage?
   
-  private let context = CIContext()
-  let queue = OperationQueue()
+  private static let context = CIContext()
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  //MARK: Initializern
+  init(image: UIImage? = nil) {
+    inputImage = image
+    super.init()
   }
-
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+  
+  override func main() {
+    print("TiltShiftOperation main \(inputImage!)")
+    getOutputImage()
   }
-
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "normal", for: indexPath) as! PhotoCell
-    cell.display(image: nil)
-    let image = UIImage(named: "\(indexPath.row).png")!
-    
-    let op = TiltShiftOperation(image: image)
-    op.completionBlock = {
-      DispatchQueue.main.async {
-        guard let cell = tableView.cellForRow(at: indexPath) as? PhotoCell
-        else { return }
-        cell.isLoading = false
-        cell.display(image: op.outputImage)
-      }
-    }
-    
-    //create operation
-//    let op = TiltShiftOperation(image: image)
-//    op.completionBlock = {
-//      //do these after operation is completed
-//      DispatchQueue.main.async {
-//        guard let cell = tableView.cellForRow(at: indexPath) as? PhotoCell else { return }
-//        cell.isLoading = false
-//        cell.display(image: op.outputImage)
-////        return cell
-//      }
+  
+  override func start() {
+    print("Started TiltShiftOperation \(inputImage!)")
+    getOutputImage()
+  }
+  
+  func getOutputImage() {
+//    guard let filter = TiltShiftFilter(image:inputImage, radius:3),
+//          let output = filter.outputImage else {
+//              print("Failed to generate image")
+//              return
 //    }
-//    //add operation
-//    queue.addOperation(op)
-    return cell
+//
+//    let fromRect = CGRect (origin: .zero, size: inputImage.size)
+//    guard let cgImage = TiltShiftOperation.context.createCGImage(output, from: fromRect) else {
+//          print("Image generation failed")
+//          return
+//    }
+//    outputImage = UIImage(cgImage: cgImage)
+    
+    if let inputImage = inputImage {
+        guard let filter = TiltShiftFilter(image: inputImage, radius:3),
+          let output = filter.outputImage else {
+            print("Failed to generate tilt shift image")
+            return
+        }
+
+        let fromRect = CGRect(origin: .zero, size: inputImage.size)
+        guard let cgImage = TiltShiftOperation.context.createCGImage(output, from: fromRect) else {
+          print("No image generated")
+          return
+        }
+        outputImage = UIImage(cgImage: cgImage)
+      }
   }
 }

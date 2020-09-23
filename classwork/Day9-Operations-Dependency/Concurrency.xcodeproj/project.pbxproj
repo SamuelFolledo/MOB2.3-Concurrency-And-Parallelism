@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		337A6F6025196367007E9892 /* TiltShiftOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337A6F5F25196367007E9892 /* TiltShiftOperation.swift */; };
-		337A6F6825196AA1007E9892 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337A6F6725196AA1007E9892 /* PhotoCell.swift */; };
+		33C4D92C251ACA04006B6986 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4D92B251ACA04006B6986 /* PhotoCell.swift */; };
+		33C4D92F251ACA10006B6986 /* TiltShiftOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4D92E251ACA10006B6986 /* TiltShiftOperation.swift */; };
 		5394F02521864DF5006E754C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5394F02321864DF4006E754C /* LaunchScreen.storyboard */; };
 		D27437502211DC9F00B1E02F /* TiltShiftTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */; };
 		D2A5F2091F4A9144005CD714 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A5F2071F4A9144005CD714 /* Main.storyboard */; };
@@ -19,8 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		337A6F5F25196367007E9892 /* TiltShiftOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiltShiftOperation.swift; path = concurrency/TiltShiftOperation.swift; sourceTree = SOURCE_ROOT; };
-		337A6F6725196AA1007E9892 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoCell.swift; path = concurrency/PhotoCell.swift; sourceTree = SOURCE_ROOT; };
+		33C4D92B251ACA04006B6986 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCell.swift; path = concurrency/Views/PhotoCell.swift; sourceTree = SOURCE_ROOT; };
+		33C4D92E251ACA10006B6986 /* TiltShiftOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiltShiftOperation.swift; path = concurrency/Models/TiltShiftOperation.swift; sourceTree = SOURCE_ROOT; };
 		5394F02421864DF4006E754C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltShiftTableViewController.swift; sourceTree = "<group>"; };
 		D2A5F2001F4A9144005CD714 /* Concurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +43,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33C4D926251AC955006B6986 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				33C4D92E251ACA10006B6986 /* TiltShiftOperation.swift */,
+				D2CC8F0E220890C50025B523 /* TiltShiftFilter.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		33C4D928251AC95F006B6986 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D2CC8F10220C93EF0025B523 /* ExampleViewController.swift */,
+				D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		33C4D92A251AC985006B6986 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				33C4D92B251ACA04006B6986 /* PhotoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D2A5F1F71F4A9143005CD714 = {
 			isa = PBXGroup;
 			children = (
@@ -66,14 +92,12 @@
 			children = (
 				D2A5F2201F4A96D0005CD714 /* AppDelegate.swift */,
 				D2A5F20A1F4A9144005CD714 /* Assets.xcassets */,
-				D2CC8F10220C93EF0025B523 /* ExampleViewController.swift */,
+				33C4D926251AC955006B6986 /* Models */,
+				33C4D928251AC95F006B6986 /* Controllers */,
 				D2A5F20F1F4A9144005CD714 /* Info.plist */,
 				5394F02321864DF4006E754C /* LaunchScreen.storyboard */,
 				D2A5F2071F4A9144005CD714 /* Main.storyboard */,
-				337A6F6725196AA1007E9892 /* PhotoCell.swift */,
-				D2CC8F0E220890C50025B523 /* TiltShiftFilter.swift */,
-				D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */,
-				337A6F5F25196367007E9892 /* TiltShiftOperation.swift */,
+				33C4D92A251AC985006B6986 /* Views */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
@@ -151,11 +175,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2A5F2211F4A96D0005CD714 /* AppDelegate.swift in Sources */,
+				33C4D92C251ACA04006B6986 /* PhotoCell.swift in Sources */,
 				D2CC8F0F220890C50025B523 /* TiltShiftFilter.swift in Sources */,
 				D2CC8F11220C93EF0025B523 /* ExampleViewController.swift in Sources */,
 				D27437502211DC9F00B1E02F /* TiltShiftTableViewController.swift in Sources */,
-				337A6F6825196AA1007E9892 /* PhotoCell.swift in Sources */,
-				337A6F6025196367007E9892 /* TiltShiftOperation.swift in Sources */,
+				33C4D92F251ACA10006B6986 /* TiltShiftOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

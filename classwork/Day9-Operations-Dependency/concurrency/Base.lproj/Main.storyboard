@@ -126,7 +126,7 @@
                                                 <constraint firstAttribute="width" constant="200" id="DLG-WG-dBs"/>
                                             </constraints>
                                         </imageView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ZgE-oi-Say">
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ZgE-oi-Say">
                                             <rect key="frame" x="141.5" y="101.5" width="37" height="37"/>
                                         </activityIndicatorView>
                                     </subviews>

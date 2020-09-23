@@ -1,4 +1,4 @@
-/// Copyright (c) 2020 Razeware LLC
+/// Copyright (c) 2019 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -28,40 +28,36 @@
 
 import UIKit
 
-final class TiltShiftOperation: Operation {
-  var inputImage: UIImage
-  var outputImage: UIImage?
+final class ExampleViewController: UIViewController {
   
-  private static let context = CIContext()
+  @IBOutlet private weak var tilted: UIImageView!
+  @IBOutlet private weak var label: UILabel!
+  @IBOutlet private weak var spinner: UIActivityIndicatorView!
   
-  //MARK: Initializern
-  init(image: UIImage) {
-    inputImage = image
-    super.init()
-  }
-  
-  override func main() {
-    print("TiltShiftOperation main \(inputImage)")
-    getOutputImage()
-  }
-  
-  override func start() {
-    print("Started TiltShiftOperation \(inputImage)")
-    getOutputImage()
-  }
-  
-  func getOutputImage() {
-    guard let filter = TiltShiftFilter(image:inputImage, radius:3),
-          let output = filter.outputImage else {
-              print("Failed to generate image")
-              return
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    defer {
+      spinner.stopAnimating()
     }
     
-    let fromRect = CGRect (origin: .zero, size: inputImage.size)
-    guard let cgImage = TiltShiftOperation.context.createCGImage(output, from: fromRect) else {
-          print("Image generation failed")
-          return
+    let image = UIImage(named: "dark_road_small")!
+    
+    guard let filter = TiltShiftFilter(image: image, radius:3),
+          let output = filter.outputImage else {
+      label.text = "Failed to generate tilt shift image"
+      return
     }
-    outputImage = UIImage(cgImage: cgImage)
+    
+    let context = CIContext()
+    
+    guard let cgImage = context.createCGImage(output, from: CGRect(origin: .zero, size: image.size)) else {
+      label.text = "No image generated"
+      return
+    }
+    
+    tilted.image = UIImage(cgImage: cgImage)
+    
+    label.isHidden = true
   }
 }
