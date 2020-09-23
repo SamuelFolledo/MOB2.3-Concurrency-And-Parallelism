@@ -33,6 +33,7 @@ class AsyncOperation: Operation {
     case ready, executing, finished
 
     fileprivate var keyPath: String {
+      print("is\(rawValue.capitalized)")
       return "is\(rawValue.capitalized)"
     }
   }

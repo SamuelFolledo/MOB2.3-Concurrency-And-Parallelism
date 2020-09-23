@@ -49,10 +49,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33415554251AD8A200994077 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D2CC8F10220C93EF0025B523 /* ExampleViewController.swift */,
+				D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		33415556251AD8AD00994077 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D27437512211DFBB00B1E02F /* PhotoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		33415558251AD8B600994077 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D2CC8F0E220890C50025B523 /* TiltShiftFilter.swift */,
+				D27437532211E33200B1E02F /* TiltShiftOperation.swift */,
+				A23DE22C2245585C00AD8A4B /* NetworkImageOperation.swift */,
+				F50C222422204FA0003E3283 /* AsyncOperation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		D2A5F1F71F4A9143005CD714 = {
 			isa = PBXGroup;
 			children = (
 				D2A5F2021F4A9144005CD714 /* Concurrency */,
+				D2A5F20F1F4A9144005CD714 /* Info.plist */,
+				5394F02321864DF4006E754C /* LaunchScreen.storyboard */,
+				D2A5F2071F4A9144005CD714 /* Main.storyboard */,
 				D2A5F2011F4A9144005CD714 /* Products */,
 			);
 			indentWidth = 2;
@@ -73,16 +104,9 @@
 				F50C222522204FA1003E3283 /* Photos.plist */,
 				D2A5F2201F4A96D0005CD714 /* AppDelegate.swift */,
 				D2A5F20A1F4A9144005CD714 /* Assets.xcassets */,
-				D2CC8F10220C93EF0025B523 /* ExampleViewController.swift */,
-				D2A5F20F1F4A9144005CD714 /* Info.plist */,
-				5394F02321864DF4006E754C /* LaunchScreen.storyboard */,
-				D2A5F2071F4A9144005CD714 /* Main.storyboard */,
-				D27437512211DFBB00B1E02F /* PhotoCell.swift */,
-				D2CC8F0E220890C50025B523 /* TiltShiftFilter.swift */,
-				D27437532211E33200B1E02F /* TiltShiftOperation.swift */,
-				D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */,
-				A23DE22C2245585C00AD8A4B /* NetworkImageOperation.swift */,
-				F50C222422204FA0003E3283 /* AsyncOperation.swift */,
+				33415554251AD8A200994077 /* Controllers */,
+				33415556251AD8AD00994077 /* Views */,
+				33415558251AD8B600994077 /* Models */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
