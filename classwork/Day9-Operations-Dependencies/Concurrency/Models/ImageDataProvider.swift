@@ -1,4 +1,4 @@
-/// Copyright (c) 2019 Razeware LLC
+/// Copyright (c) 2020 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -26,48 +26,8 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import UIKit
+import UIKit.UIImage
 
-final class NetworkImageOperation: AsyncOperation {
-  var image: UIImage?
-
-  private let url: URL
-  private let completion: ((Data?, URLResponse?, Error?) -> Void)?
-
-  init(
-    url: URL,
-    completion: ((Data?, URLResponse?, Error?) -> Void)? = nil) {
-
-    self.url = url
-    self.completion = completion
-
-    super.init()
-  }
-
-  convenience init?(
-    string: String,
-    completion: ((Data?, URLResponse?, Error?) -> Void)? = nil) {
-
-    guard let url = URL(string: string) else { return nil }
-    self.init(url: url, completion: completion)
-  }
-
-  override func main() {
-    URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-      guard let self = self else { return }
-
-      defer { self.state = .finished }
-
-      if let completion = self.completion {
-        completion(data, response, error)
-        return
-      }
-
-      guard error == nil, let data = data else { return }
-
-      self.image = UIImage(data: data)
-    }.resume()
-  }
+protocol ImageDataProvider {
+  var image: UIImage? { get }
 }
-
-extension NetworkImageOperation: ImageDataProvider {}

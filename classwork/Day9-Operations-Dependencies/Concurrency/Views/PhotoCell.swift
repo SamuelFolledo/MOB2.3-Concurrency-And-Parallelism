@@ -42,6 +42,11 @@ final class PhotoCell: UITableViewCell {
       }
     }
   }
+  
+  override func prepareForReuse() {
+    nasaImageView.image = nil
+    activityIndicator.startAnimating()
+  }
 
   func display(image: UIImage?) {
     nasaImageView.image = image
